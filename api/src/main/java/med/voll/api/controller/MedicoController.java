@@ -1,6 +1,6 @@
 package med.voll.api.controller;
 
-import med.voll.api.medico.DatosRegistrosMedicos;
+import med.voll.api.medico.medico.DatosRegistrosMedicos;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
