@@ -1,12 +1,10 @@
-CREATE TABLE medicos (
-    id SERIAL PRIMARY KEY,
-    nombre VARCHAR(255) NOT NULL,
-    email VARCHAR(255) NOT NULL,
-    documentos VARCHAR(255) NOT NULL,
-    especialidad VARCHAR(255) NOT NULL,
-    calle VARCHAR(255) NOT NULL,
-    numero VARCHAR(255) NOT NULL,
-    complemento VARCHAR(255),
-    distrito VARCHAR(255) NOT NULL,
-    ciudad VARCHAR(255) NOT NULL
+CREATE TABLE médicos (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nombre VARCHAR(100) NOT NULL,
+    especialidad VARCHAR(100) NOT NULL,
+    telefono VARCHAR(15),
+    email VARCHAR(100),
+    fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+
+    primary key id
 );
