@@ -5,11 +5,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+@Embeddable
 @Getter //libreria de lombo
 @NoArgsConstructor
 @AllArgsConstructor
-
-@Embeddable
 public class Direccion {
 	private String calle;
 	private String numero;

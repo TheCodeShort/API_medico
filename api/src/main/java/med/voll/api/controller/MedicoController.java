@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/medicos")
 
@@ -18,7 +20,7 @@ public class MedicoController {
 	private IMedicoRepositori iMedicoRepositori;
 
 	@PostMapping
-	public void regidtraMedico(@RequestBody DatosRegistrosMedicos datosRegistrosMedicos){// para que reconosca el body
+	public void regidtraMedico(@RequestBody @Valid  DatosRegistrosMedicos datosRegistrosMedicos){// para que reconosca el body
 		iMedicoRepositori.save(new Medico(datosRegistrosMedicos));
 
 		
