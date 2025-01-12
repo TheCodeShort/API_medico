@@ -2,8 +2,8 @@ package med.voll.api.controller;
 
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
-import med.voll.api.direccion.DatosDireccion;
-import med.voll.api.medico.*;
+import med.voll.api.domain.direccion.DatosDireccion;
+import med.voll.api.domain.medico.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
-import java.util.List;
+
 @RestController
 @RequestMapping("/medicos")
 
@@ -45,9 +45,9 @@ public class MedicoController {
 	//y si juegamos con la URL nos ayudamos para mostrar cierta inforacion lo bueno de usar (Pageable)
 	//@PageableDefault sobreescribe los datos de spring en el JSON size es uno datos que nos da spring (Pageable)
 	@GetMapping
-	public Page<DatosListadoMedico> listadoMedicos(@PageableDefault(size = 2) Pageable paginacion) {
+	public ResponseEntity<Page<DatosListadoMedico>> listadoMedicos(@PageableDefault(size = 2) Pageable paginacion) {
 		//return iMedicoRepositori.findAll(paginacion).map(DatosListadoMedico::new);
-		return iMedicoRepositori.findByActivoTrue(paginacion).map(DatosListadoMedico::new);
+		return ResponseEntity.ok(iMedicoRepositori.findByActivoTrue(paginacion).map(DatosListadoMedico::new));
 	}
 	//
 	@PutMapping
@@ -73,6 +73,17 @@ public class MedicoController {
 		medico.desactivarMedico();
 		return ResponseEntity.noContent().build();//con esto retornamos codigo HTTP y para que retorne hay que poner un build()
 													//ResponseEntity me ayuda a personalizar las respuesta HTTP
+	}
+
+	@GetMapping("/{id}")
+	public ResponseEntity<DatosRespuestaMedico> retornaDatosMedico(@PathVariable Long id) {
+		Medico medico = iMedicoRepositori.getReferenceById(id);
+		var datosMedico = new DatosRespuestaMedico(medico.getId(), medico.getNombre(), medico.getEmail(),
+				medico.getTelefono(), medico.getEspecialidad().toString(),
+				new DatosDireccion(medico.getDireccion().getCalle(), medico.getDireccion().getDistrito(),
+						medico.getDireccion().getCiudad(), medico.getDireccion().getNumero(),
+						medico.getDireccion().getComplemento()));
+		return ResponseEntity.ok(datosMedico);
 	}
 
 //    DELETE EN BASE DE DATOD

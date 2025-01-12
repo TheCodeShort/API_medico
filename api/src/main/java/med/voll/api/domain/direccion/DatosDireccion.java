@@ -1,4 +1,4 @@
-package med.voll.api.direccion;
+package med.voll.api.domain.direccion;
 import javax.validation.constraints.NotBlank;
 public record DatosDireccion(@NotBlank String calle,
                              @NotBlank String distrito,
