@@ -54,7 +54,7 @@ public class Medico {
 		}
 	}
 
-	public void desactivarMedico(Medico medico) {
-		this.activo = false;
+	public void desactivarMedico() {//si quitamos estos parametro
+		this.activo = false; //  al dejarlo en false estamos diciendo que dejamos de trabajar a nivel de la entidad JPA de esta clse
 	}
 }
