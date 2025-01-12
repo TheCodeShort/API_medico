@@ -35,4 +35,6 @@ public class Paciente {
 		this.direccion = new Direccion(datos.direccion());
 	}
 
+
+
 }
