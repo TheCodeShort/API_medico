@@ -20,15 +20,17 @@ import org.springframework.web.bind.annotation.RestController;
 public class AutenticacionController {
 
 	@Autowired
-	private AuthenticationManager authenticationManager;
+	private AuthenticationManager authenticationManager;//el de spring
 
 	@Autowired
-	private TokenService tokenService;
+	private TokenService tokenService;//el nuestro
 
 	@PostMapping
 	public ResponseEntity autenticarUsuario(@RequestBody @Valid DatosAutenticacionUsuario datosAutenticacionUsuario) {
 		Authentication authToken = new UsernamePasswordAuthenticationToken(datosAutenticacionUsuario.login(),
 				datosAutenticacionUsuario.clave());
+
+		//Aca se consume los datos
 		var usuarioAutenticado = authenticationManager.authenticate(authToken);
 		var JWTtoken = tokenService.generarToken((Usuario) usuarioAutenticado.getPrincipal());
 		return ResponseEntity.ok(new DatosJWTToken(JWTtoken));

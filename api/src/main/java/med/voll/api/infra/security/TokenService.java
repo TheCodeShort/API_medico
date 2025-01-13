@@ -14,12 +14,12 @@ import java.time.ZoneOffset;
 @Service
 public class TokenService {
 
-	@Value("${api.security.secret}")
+	@Value("${api.security.secret}")//esto viene de aplication.properties
 	private String apiSecret;
 
 	public String generarToken(Usuario usuario) {
 		try {
-			Algorithm algorithm = Algorithm.HMAC256(apiSecret);
+			Algorithm algorithm = Algorithm.HMAC256(apiSecret);//dejar aca la constraseña como un string es mala idea
 			return JWT.create()
 					.withIssuer("voll med")
 					.withSubject(usuario.getLogin())
